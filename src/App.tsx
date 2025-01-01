@@ -1,5 +1,5 @@
 import User from "./Pages/Users";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import UserDetails from "./Pages/UserDetails";
 import Posts from "./Pages/Posts";
 import PostDetails from "./Pages/PostDetails";
@@ -10,7 +10,7 @@ import Signup from "./Pages/Signup";
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -20,7 +20,7 @@ function App() {
           <Route path="/posts" element={<Posts />} />
           <Route path="/post/:id" element={<PostDetails />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }
