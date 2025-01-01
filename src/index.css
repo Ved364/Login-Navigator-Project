@@ -1,0 +1,325 @@
+.user-postBackground {
+    background-image: url('./assets/user_post.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+}
+
+.user-postTopBar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+}
+
+.username {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+}
+
+.logout-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.user-postButton {
+    padding: 100px;
+    font-size: 25px;
+    border: none;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.189);
+    backdrop-filter: blur(8px);
+    color: white;
+}
+
+.user-postFlex {
+    display: flex;
+    height: 80vh;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20rem;
+}
+
+.UserBackgroundImg {
+    background-image: url('./assets/user.webp');
+}
+
+.userBackground {
+    margin: 0;
+    height: 100vh;
+    background-size: cover;
+    font-family: sans-serif;
+    font-weight: 100;
+}
+
+.content_table {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.189);
+    backdrop-filter: blur(10px);
+    border-collapse: collapse;
+    width: 120vh;
+    margin: 25px auto;
+    font-size: 18px;
+    min-width: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.content_table thead tr {
+    background-color: #00987aa3;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    backdrop-filter: blur(40px);
+}
+
+.content_table th, .content_table td {
+    padding: 12px 15px;
+    text-align: center;
+}
+
+.content_table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    font-size: 15px;
+}
+
+.content_table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f32a;
+    backdrop-filter: blur(10px);
+}
+
+.background_table {
+    height: 80vh;
+    background-size: cover;
+}
+
+.content_table tbody tr:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.buttonStyle {
+    background-color: white;
+    background: transparent;
+    height: 4vh;
+    background-size: cover;
+    margin-left: 18rem;
+    padding-top: 5rem;
+}
+
+.postBackgroundImg {
+    background-image: url('./assets/post.avif');
+}
+
+.postBackgroundImg1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.postsCard{
+    background-color: rgba(255, 255, 255, 0.223);
+    width: 65rem;
+    padding: 7px;
+    backdrop-filter: blur(40px);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.postsSmallCard {
+    background-color: white;
+    border-radius: 12px;
+    width: 60rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+.postsSmallSubCard {
+    background-color: #009870;
+    align-items: center;
+    padding: 5px;
+    padding-left: 20px;
+    border-radius: 12px 12px 0 0;
+}
+
+.postDetailsCard {
+    height: 60vh;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.postDetailsSmallCard {
+    background-color: rgba(255, 255, 255, 0.374);
+    border-radius: 12px;
+    width: 60rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    cursor: pointer;
+    backdrop-filter: blur(40px);
+    color: white;
+    font-size: 20px;
+}
+
+.loginPageBackground {
+    background-image: url('./assets/Login.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginContainer {
+    position: relative;
+    width: 256px;
+    height: 256px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginContainer span {
+    position: absolute;
+    left: 0;
+    width: 32px;
+    height: 6px;
+    background-color: #fff;
+    border-radius: 8px;
+    transform-origin: 128px;
+    transform: scale(2.2) rotate(calc(var(--i) * (360deg / 50)));
+    animation: animateBlink 3s linear infinite;
+    animation-delay: calc(var(--i) * (3s / 50));
+}
+
+@keyframes animateBlink {
+    0% {
+        background: #0ef;
+    }
+}
+
+.login-box {
+    position: absolute;
+    width: 400px;
+}
+
+.login-box form {
+    width: 100%;
+    padding: 0 50px;
+}
+
+.login-box h2 {
+    font-size: 2em;
+    color: white;
+    text-align: center;
+}
+
+.input-box {
+    position: relative;
+    margin: 25px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #2c4766;
+    outline: none;
+    border-radius: 40px;
+    font-size: 1em;
+    color: #000;
+    padding: 0 20px;
+    transition: .5s ease;
+}
+
+.input-box input:focus,
+.input-box input:valid {
+    border-color: #0ef;
+    background-color: rgba(255, 255, 255, 0.238);
+    backdrop-filter: blur(7px);
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: white;
+    pointer-events: none;
+    transition: .5s ease;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: 1px;
+    font-size: .8em;
+    color: #000;
+    background-color: rgba(0, 238, 255, 0.177);
+    backdrop-filter: blur(40px);
+    padding: 0 6px;
+    border-radius: 12px;
+}
+
+.forgot-pass {
+    margin: -15px 0 10px;
+    text-align: center;
+}
+
+.forgot-pass a {
+    font-size: .85em;
+    color: #000;
+    text-decoration: none;
+}
+
+.forgot-pass a:hover {
+    text-decoration: underline;
+}
+
+.butn {
+    width: 100%;
+    height: 45px;
+    background: #0ef;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    font-size: 1em;
+    color: #1f293a;
+    font-weight: 600;
+}
+
+.signup-link {
+    margin: 20px 0 10px;
+    text-align: center;
+}
+
+.signup-link a {
+    font-size: 1em;
+    color: #0ef;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
