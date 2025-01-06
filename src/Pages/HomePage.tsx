@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-type User = {
+type Username = {
   username: string;
 };
 
@@ -10,34 +10,39 @@ type UserPostLinks = {
   navLink: string;
 };
 
-const User_post = () => {
+const HomePage = () => {
   const [username, setUsername] = useState<string | null>(null);
+  const currentUser = localStorage.getItem("currentUser");
   const userPostButton: UserPostLinks[] = [
-    { name: "User", navLink: "/users" },
-    { name: "Post", navLink: "/posts" },
+    { name: "Users", navLink: "/users" },
+    { name: "Posts", navLink: "/posts" },
   ];
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const currentUser = localStorage.getItem("currentUser");
     if (currentUser) {
-      const user: User = JSON.parse(currentUser);
-      setUsername(user.username);
+      const parsedUser: Username = JSON.parse(currentUser);
+      setUsername(parsedUser.username);
+    } else {
+      navigate("/login");
     }
-  }, []);
+  }, [currentUser, navigate]);
 
   return (
     <>
       <div className="user-postBackground">
         <div className="user-postTopBar">
           <div className="username">
-            <h3>Welcome {username}</h3>
+            <h3 className="fw-bold">Welcome {username}</h3>
           </div>
           <button
             type="button"
             className="btn btn-primary logout-button"
-            onClick={() => navigate("/")}
+            onClick={() => {
+              navigate("/login");
+              localStorage.removeItem("currentUser");
+            }}
           >
             Log out
           </button>
@@ -59,4 +64,4 @@ const User_post = () => {
   );
 };
 
-export default User_post;
+export default HomePage;

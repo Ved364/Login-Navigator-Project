@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "../components/Pagination";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -14,9 +14,10 @@ type User = {
   email: string;
 };
 
-const Users = () => {
+const UsersPage = () => {
   const [data, setData] = useState<User[]>([]);
   const [username, setUsername] = useState<string | null>(null);
+  const currentUser = localStorage.getItem("currentUser");
   const navigate = useNavigate();
   const location = useLocation();
   const query = new URLSearchParams(location.search);
@@ -33,41 +34,35 @@ const Users = () => {
     navigate(`/user/${userId}`);
   };
 
-  const paginationUser = useMemo(() => {
-    const indexOfLastRow = currentPage * rowsPerPage;
-    const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-    const currentRows = data.slice(indexOfFirstRow, indexOfLastRow);
-    const totalPages = Math.ceil(data.length / rowsPerPage);
-    return { indexOfLastRow, indexOfFirstRow, currentRows, totalPages };
-  }, [data, currentPage, rowsPerPage]);
-
-  const { currentRows, totalPages } = paginationUser;
+  const totalPages = Math.ceil(10 / rowsPerPage);
 
   useEffect(() => {
     axios
-      .get("https://jsonplaceholder.typicode.com/users")
+      .get(
+        `https://jsonplaceholder.typicode.com/users?_start=${
+          rowsPerPage * (currentPage - 1)
+        }&_limit=${rowsPerPage * currentPage}`
+      )
       .then((res) => setData(res.data))
       .catch((err) => console.error(err));
-  }, []);
-
-  useEffect(() => {
-    const currentUser = localStorage.getItem("currentUser");
     if (currentUser) {
-      const user: Username = JSON.parse(currentUser);
-      setUsername(user.username);
+      const parsedUser: Username = JSON.parse(currentUser);
+      setUsername(parsedUser.username);
+    } else {
+      navigate("/login");
     }
-  }, []);
+  }, [currentUser, navigate, currentPage]);
 
   return (
     <div className="userBackground UserBackgroundImg">
       <div className="user-postTopBar">
         <div className="username">
-          <h3>{username}</h3>
+          <h3 className="fw-bold">Welcome {username} for the Users Section</h3>
         </div>
         <button
           type="button"
           className="btn btn-primary"
-          onClick={() => navigate("/user-post")}
+          onClick={() => navigate("/")}
         >
           Back
         </button>
@@ -84,7 +79,7 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {currentRows.map((user, index) => (
+            {data.map((user, index) => (
               <tr key={index} onClick={() => handleRowsChange(user.id)}>
                 <td>{user.id}</td>
                 <td>{user.username}</td>
@@ -104,4 +99,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default UsersPage;

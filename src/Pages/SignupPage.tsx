@@ -14,7 +14,7 @@ for (let i = 0; i < 50; i++) {
   a.push(i);
 }
 
-const Signup = () => {
+const SignupPage = () => {
   const navigate = useNavigate();
 
   const handleSignup = (e: FormEvent) => {
@@ -63,4 +63,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignupPage;

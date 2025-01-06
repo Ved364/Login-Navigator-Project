@@ -25,33 +25,13 @@ type UserDetails = {
   company: { name: string; catchPhrase: string; bs: string };
 };
 
-const UserDetails = () => {
+const UserDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
   const [user, setUser] = useState<UserDetails | null>(null);
   const [username, setUsername] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const currentUser = localStorage.getItem("currentUser");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    axios
-      .get(`https://jsonplaceholder.typicode.com/users/${id}`)
-      .then((res) => {
-        setUser(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
-  }, [id]);
-
-  useEffect(() => {
-    const currentUser = localStorage.getItem("currentUser");
-    if (currentUser) {
-      const UserName: Username = JSON.parse(currentUser);
-      setUsername(UserName.username);
-    }
-  }, []);
 
   const handleUserpage = () => {
     navigate(-1);
@@ -115,6 +95,28 @@ const UserDetails = () => {
     );
   }, [loading, user]);
 
+  useEffect(() => {
+    axios
+      .get(`https://jsonplaceholder.typicode.com/users/${id}`)
+      .then((res) => {
+        setUser(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, [id]);
+
+  useEffect(() => {
+    if (currentUser) {
+      const parsedUser: Username = JSON.parse(currentUser);
+      setUsername(parsedUser.username);
+    } else {
+      navigate("/login");
+    }
+  }, [currentUser, navigate]);
+
   return (
     <>
       <div className="userBackground UserBackgroundImg">
@@ -136,4 +138,4 @@ const UserDetails = () => {
   );
 };
 
-export default UserDetails;
+export default UserDetailsPage;

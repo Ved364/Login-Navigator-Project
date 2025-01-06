@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "../components/Pagination";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -14,30 +14,16 @@ type Posts = {
   body: string;
 };
 
-const Posts = () => {
+const PostsPage = () => {
   const [username, setUsername] = useState<string | null>(null);
   const [postData, setPostData] = useState<Posts[]>([]);
+  const currentUser = localStorage.getItem("currentUser");
   const navigate = useNavigate();
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const initialPage = parseInt(query.get("page") || "1", 10);
   const [currentPage, setCurrentPage] = useState(initialPage);
   const rowsPerPage = 3;
-
-  useEffect(() => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .then((res) => setPostData(res.data))
-      .catch((err) => console.log(err));
-  }, []);
-
-  useEffect(() => {
-    const currentUser = localStorage.getItem("currentUser");
-    if (currentUser) {
-      const user: User = JSON.parse(currentUser);
-      setUsername(user.username);
-    }
-  }, []);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -48,36 +34,47 @@ const Posts = () => {
     navigate(`/post/${userId}`);
   };
 
-  const paginationData = useMemo(() => {
-    const indexOfLastRow = currentPage * rowsPerPage;
-    const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-    const currentRows = postData.slice(indexOfFirstRow, indexOfLastRow);
-    const totalPages = Math.ceil(postData.length / rowsPerPage);
-    return { indexOfLastRow, indexOfFirstRow, currentRows, totalPages };
-  }, [postData, currentPage, rowsPerPage]);
+  const totalPages = Math.ceil(100 / rowsPerPage);
 
-  const { currentRows, totalPages } = paginationData;
+  useEffect(() => {
+    axios
+      .get(
+        `https://jsonplaceholder.typicode.com/posts?_start=${
+          rowsPerPage * (currentPage - 1)
+        }&_limit=${rowsPerPage}`
+      )
+      .then((res) => setPostData(res.data))
+      .catch((err) => console.log(err));
+    if (currentUser) {
+      const parsedUser: User = JSON.parse(currentUser);
+      setUsername(parsedUser.username);
+    } else {
+      navigate("/login");
+    }
+  }, [currentUser, navigate, currentPage]);
 
   return (
     <>
       <div className="userBackground postBackgroundImg">
         <div className="user-postTopBar">
           <div className="username">
-            <h3>{username}</h3>
+            <h3 className="fw-bold">
+              Welcome {username} for the Posts Section
+            </h3>
           </div>
           <button
             type="button"
             className="btn btn-primary"
-            onClick={() => navigate("/user-post")}
+            onClick={() => navigate("/")}
           >
             Back
           </button>
         </div>
         <div>
-          <h3 className="text-center text-white fw-bold">Posts</h3>
+          <h3 className="text-center text-white">Posts</h3>
           <div className="postBackgroundImg1">
             <div className="postsCard">
-              {currentRows.map((pData, index) => (
+              {postData.map((pData, index) => (
                 <div
                   key={index}
                   onClick={() => handleCardChange(pData.id)}
@@ -112,4 +109,4 @@ const Posts = () => {
   );
 };
 
-export default Posts;
+export default PostsPage;

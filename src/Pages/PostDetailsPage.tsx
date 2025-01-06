@@ -13,33 +13,13 @@ type PostDetails = {
   body: string;
 };
 
-const PostDetails = () => {
+const PostDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
   const [username, setUsername] = useState<string | null>(null);
   const [post, setPost] = useState<PostDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const currentUser = localStorage.getItem("currentUser");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    axios
-      .get(`https://jsonplaceholder.typicode.com/posts/${id}`)
-      .then((res) => {
-        setPost(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
-  }, [id]);
-
-  useEffect(() => {
-    const currentUser = localStorage.getItem("currentUser");
-    if (currentUser) {
-      const user: User = JSON.parse(currentUser);
-      setUsername(user.username);
-    }
-  }, []);
 
   const handleUserpage = () => {
     navigate(-1);
@@ -74,6 +54,28 @@ const PostDetails = () => {
     );
   }, [loading, post]);
 
+  useEffect(() => {
+    axios
+      .get(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      .then((res) => {
+        setPost(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, [id]);
+
+  useEffect(() => {
+    if (currentUser) {
+      const parsedUser: User = JSON.parse(currentUser);
+      setUsername(parsedUser.username);
+    } else {
+      navigate("/login");
+    }
+  }, [currentUser, navigate]);
+
   return (
     <>
       <div className="userBackground postBackgroundImg">
@@ -95,4 +97,4 @@ const PostDetails = () => {
   );
 };
 
-export default PostDetails;
+export default PostDetailsPage;

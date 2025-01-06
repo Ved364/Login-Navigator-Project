@@ -1,24 +1,24 @@
-import User from "./Pages/Users";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import UserDetails from "./Pages/UserDetails";
-import Posts from "./Pages/Posts";
-import PostDetails from "./Pages/PostDetails";
-import User_post from "./Pages/User_post";
-import Login from "./Pages/Login";
-import Signup from "./Pages/Signup";
+import LoginPage from "./Pages/LoginPage";
+import SignupPage from "./Pages/SignupPage";
+import HomePage from "./Pages/HomePage";
+import UsersPage from "./Pages/UsersPage";
+import UserDetailsPage from "./Pages/UserDetailsPage";
+import PostsPage from "./Pages/PostsPage";
+import PostDetailsPage from "./Pages/PostDetailsPage";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/user-post" element={<User_post />} />
-          <Route path="/users" element={<User />} />
-          <Route path="/user/:id" element={<UserDetails />} />
-          <Route path="/posts" element={<Posts />} />
-          <Route path="/post/:id" element={<PostDetails />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/users" element={<UsersPage />} />
+          <Route path="/user/:id" element={<UserDetailsPage />} />
+          <Route path="/posts" element={<PostsPage />} />
+          <Route path="/post/:id" element={<PostDetailsPage />} />
         </Routes>
       </BrowserRouter>
     </>

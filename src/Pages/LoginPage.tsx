@@ -14,7 +14,7 @@ for (let i = 0; i < 50; i++) {
   a.push(i);
 }
 
-const Login = () => {
+const LoginPage = () => {
   const [, setLogin] = useState<boolean>(false);
   const [, setData] = useState<User[]>([]);
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const Login = () => {
           setLogin(true);
           if (val.email === email && val.password === password) {
             localStorage.setItem("currentUser", JSON.stringify(val));
-            navigate("/user-post");
+            navigate("/");
           } else if (val.email !== email) {
             alert(`${email} does not exist`);
           } else {
@@ -82,4 +82,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;
