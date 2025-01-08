@@ -78,13 +78,13 @@ const PostsPage = () => {
                 <div
                   key={index}
                   onClick={() => handleCardChange(pData.id)}
-                  className="postsSmallCard m-4"
+                  className="postsSmallCard"
                 >
                   <div className="postsSmallSubCard">
                     <h4 className="header-heading">User Id: {pData.userId}</h4>
                     <h4>Id: {pData.id}</h4>
                   </div>
-                  <div className="p-3">
+                  <div className="cardpara-padding">
                     <p>
                       <span className="header-heading">Title:</span>
                       {pData.title}
@@ -97,7 +97,7 @@ const PostsPage = () => {
               ))}
             </div>
           </div>
-          <div className="text-center mt-4">
+          <div className="paginationButtons">
             <Pagination
               totalPages={totalPages}
               currentPage={currentPage}

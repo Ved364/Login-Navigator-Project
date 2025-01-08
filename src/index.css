@@ -153,6 +153,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     cursor: pointer;
+    margin: 20px;
 }
 
 .postsSmallSubCard {
@@ -347,4 +348,13 @@
 .tableHeading {
     color: white;
     text-align: center;
+}
+
+.paginationButtons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.cardpara-padding {
+    padding: 20px;
 }
