@@ -56,7 +56,7 @@ const UsersPage = () => {
         <button
           type="button"
           className="pageButton"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/home")}
         >
           Back
         </button>
