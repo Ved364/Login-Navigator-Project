@@ -58,9 +58,7 @@ const PostsPage = () => {
       <div className="userBackground postBackgroundImg">
         <div className="user-postTopBar">
           <div className="username">
-            <h3 className="header-heading">
-              Welcome {username} for the Posts Section
-            </h3>
+            <h3 className="header-heading">{username}</h3>
           </div>
           <button
             type="button"

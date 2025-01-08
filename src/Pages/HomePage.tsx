@@ -30,7 +30,7 @@ const HomePage = () => {
       <div className="user-postBackground">
         <div className="user-postTopBar">
           <div className="username">
-            <h3 className="header-heading">Welcome {username}</h3>
+            <h3 className="header-heading">{username}</h3>
           </div>
           <button
             type="button"
