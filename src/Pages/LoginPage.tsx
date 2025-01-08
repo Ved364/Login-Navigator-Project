@@ -21,7 +21,7 @@ const LoginPage = () => {
 
     if (email && password) {
       if (email === localEmail && password === localPassword) {
-        navigate("/");
+        navigate("/home");
       } else if (email !== localEmail) {
         alert("Please enter a valid email.");
       } else {

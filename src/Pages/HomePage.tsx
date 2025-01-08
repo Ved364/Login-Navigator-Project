@@ -25,7 +25,7 @@ const HomePage = () => {
             type="button"
             className="logout-button"
             onClick={() => {
-              navigate("/login");
+              navigate("/");
             }}
           >
             Log out
