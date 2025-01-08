@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import UserContent from "../components/UserContent";
 
 type Address = {
   street: string;
@@ -10,7 +11,7 @@ type Address = {
   geo: { lat: string; lng: string };
 };
 
-type UserDetails = {
+export type UserDetails = {
   id: number;
   username: string;
   name: string;
@@ -24,7 +25,6 @@ type UserDetails = {
 const UserDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
   const [user, setUser] = useState<UserDetails | null>(null);
-  const [username, setUsername] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const currentUser = localStorage.getItem("currentUser");
   const navigate = useNavigate();
@@ -32,64 +32,6 @@ const UserDetailsPage = () => {
   const handleUserpage = () => {
     navigate(-1);
   };
-
-  const userDetailsContent = useMemo(() => {
-    if (loading) {
-      return <div>Loading...</div>;
-    }
-
-    if (!user) {
-      return <div>User not found</div>;
-    }
-
-    return (
-      <div className="background_table">
-        <h3 className="tableHeading">User Id: {user.id}</h3>
-        <table className="content_table">
-          <tbody>
-            <tr>
-              <th>ID</th>
-              <td>{user.id}</td>
-            </tr>
-            <tr>
-              <th>User name</th>
-              <td>{user.username}</td>
-            </tr>
-            <tr>
-              <th>Name</th>
-              <td>{user.name}</td>
-            </tr>
-            <tr>
-              <th>Email</th>
-              <td>{user.email}</td>
-            </tr>
-            <tr>
-              <th>Address</th>
-              <td>
-                {user.address.street}, {user.address.suite}
-                {user.address.city}, {user.address.zipcode}
-              </td>
-            </tr>
-            <tr>
-              <th>Phone</th>
-              <td>{user.phone}</td>
-            </tr>
-            <tr>
-              <th>Website</th>
-              <td>{user.website}</td>
-            </tr>
-            <tr>
-              <th>Company</th>
-              <td>
-                {user.company.name}, {user.company.catchPhrase},
-                {user.company.bs}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    );
-  }, [loading, user]);
 
   useEffect(() => {
     axios
@@ -104,27 +46,18 @@ const UserDetailsPage = () => {
       });
   }, [id]);
 
-  useEffect(() => {
-    if (currentUser) {
-      const parsedUser = JSON.parse(currentUser);
-      setUsername(parsedUser);
-    } else {
-      navigate("/login");
-    }
-  }, [currentUser, navigate]);
-
   return (
     <>
       <div className="userBackground UserBackgroundImg">
         <div className="user-postTopBar">
           <div className="username">
-            <h3>{username}</h3>
+            <h3>{currentUser}</h3>
           </div>
           <button type="button" className="pageButton" onClick={handleUserpage}>
             Back
           </button>
         </div>
-        {userDetailsContent}
+        <UserContent user={user} loading={loading} />
       </div>
     </>
   );

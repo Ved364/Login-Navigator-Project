@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
 .user-postBackground {
     background-image: url('./assets/user_post.jpg');
     height: 100vh;
@@ -30,6 +35,7 @@
     background-color: inherit;
     border: none;
     color: white;
+    cursor: pointer;
 }
 
 .user-postButton {
@@ -40,6 +46,7 @@
     background-color: rgba(255, 255, 255, 0.189);
     backdrop-filter: blur(8px);
     color: white;
+    cursor: pointer;
 }
 
 .user-postFlex {
@@ -333,6 +340,7 @@
     background-color: inherit;
     border: 0;
     color: white;
+    cursor: pointer;
 }
 
 .tableHeading {
@@ -347,4 +355,9 @@
 
 .cardpara-padding {
     padding: 20px;
+}
+
+.errorPara {
+    color: red;
+    margin-left: 20px;
 }

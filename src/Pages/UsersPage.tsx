@@ -12,7 +12,6 @@ type User = {
 
 const UsersPage = () => {
   const [data, setData] = useState<User[]>([]);
-  const [username, setUsername] = useState<string | null>(null);
   const [totalCount, setTotalCount] = useState<number>(0);
 
   const navigate = useNavigate();
@@ -46,20 +45,13 @@ const UsersPage = () => {
         setTotalCount(dataCount);
       })
       .catch((err) => console.error(err));
-
-    if (currentUser) {
-      const parsedUser = JSON.parse(currentUser);
-      setUsername(parsedUser);
-    } else {
-      navigate("/login");
-    }
-  }, [currentUser, navigate, currentPage]);
+  }, [currentPage]);
 
   return (
     <div className="userBackground UserBackgroundImg">
       <div className="user-postTopBar">
         <div className="username">
-          <h3 className="header-heading">{username}</h3>
+          <h3 className="header-heading">{currentUser}</h3>
         </div>
         <button
           type="button"

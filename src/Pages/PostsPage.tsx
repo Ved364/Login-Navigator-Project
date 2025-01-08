@@ -11,7 +11,6 @@ type Posts = {
 };
 
 const PostsPage = () => {
-  const [username, setUsername] = useState<string | null>(null);
   const [postData, setPostData] = useState<Posts[]>([]);
   const [totalCount, setTotalCount] = useState<number>(0);
   const currentUser = localStorage.getItem("currentUser");
@@ -45,20 +44,14 @@ const PostsPage = () => {
         setTotalCount(dataCount);
       })
       .catch((err) => console.log(err));
-    if (currentUser) {
-      const parsedUser = JSON.parse(currentUser);
-      setUsername(parsedUser);
-    } else {
-      navigate("/login");
-    }
-  }, [currentUser, navigate, currentPage]);
+  }, [currentPage]);
 
   return (
     <>
       <div className="userBackground postBackgroundImg">
         <div className="user-postTopBar">
           <div className="username">
-            <h3 className="header-heading">{username}</h3>
+            <h3 className="header-heading">{currentUser}</h3>
           </div>
           <button
             type="button"
