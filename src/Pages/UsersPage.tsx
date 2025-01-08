@@ -14,10 +14,11 @@ const UsersPage = () => {
   const [data, setData] = useState<User[]>([]);
   const [username, setUsername] = useState<string | null>(null);
   const [totalCount, setTotalCount] = useState<number>(0);
-  const currentUser = localStorage.getItem("currentUser");
+
   const navigate = useNavigate();
   const location = useLocation();
   const query = new URLSearchParams(location.search);
+  const currentUser = localStorage.getItem("currentUser");
   const initialPage = Number(query.get("page")) || 1;
   const [currentPage, setCurrentPage] = useState(initialPage);
   const rowsPerPage = 5;
@@ -45,6 +46,7 @@ const UsersPage = () => {
         setTotalCount(dataCount);
       })
       .catch((err) => console.error(err));
+
     if (currentUser) {
       const parsedUser = JSON.parse(currentUser);
       setUsername(parsedUser);
