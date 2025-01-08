@@ -26,6 +26,10 @@
     position: absolute;
     top: 10px;
     right: 10px;
+    padding: 5px 15px;
+    background-color: inherit;
+    border: none;
+    color: white;
 }
 
 .user-postButton {
@@ -99,6 +103,10 @@
 .background_table {
     height: 80vh;
     background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
 }
 
 .content_table tbody tr:hover {
@@ -149,6 +157,8 @@
 
 .postsSmallSubCard {
     background-color: #009870;
+    display: flex;
+    gap: 30px;
     align-items: center;
     padding: 5px;
     padding-left: 20px;
@@ -322,4 +332,19 @@
 
 .signup-link a:hover {
     text-decoration: underline;
+}
+
+.header-heading {
+    font-weight: bold;
+}
+
+.pageButton {
+    background-color: inherit;
+    border: 0;
+    color: white;
+}
+
+.tableHeading {
+    color: white;
+    text-align: center;
 }

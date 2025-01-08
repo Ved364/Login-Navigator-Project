@@ -1,10 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-type Username = {
-  username: string;
-};
-
 type UserPostLinks = {
   name: string;
   navLink: string;
@@ -22,8 +18,8 @@ const HomePage = () => {
 
   useEffect(() => {
     if (currentUser) {
-      const parsedUser: Username = JSON.parse(currentUser);
-      setUsername(parsedUser.username);
+      const parsedUser = JSON.parse(currentUser);
+      setUsername(parsedUser);
     } else {
       navigate("/login");
     }
@@ -34,11 +30,11 @@ const HomePage = () => {
       <div className="user-postBackground">
         <div className="user-postTopBar">
           <div className="username">
-            <h3 className="fw-bold">Welcome {username}</h3>
+            <h3 className="header-heading">Welcome {username}</h3>
           </div>
           <button
             type="button"
-            className="btn btn-primary logout-button"
+            className="logout-button"
             onClick={() => {
               navigate("/login");
               localStorage.removeItem("currentUser");

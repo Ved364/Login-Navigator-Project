@@ -3,10 +3,6 @@ import { useEffect, useState } from "react";
 import Pagination from "../components/Pagination";
 import { useNavigate, useLocation } from "react-router-dom";
 
-type Username = {
-  username: string;
-};
-
 type User = {
   id: number;
   username: string;
@@ -17,13 +13,15 @@ type User = {
 const UsersPage = () => {
   const [data, setData] = useState<User[]>([]);
   const [username, setUsername] = useState<string | null>(null);
+  const [totalCount, setTotalCount] = useState<number>(0);
   const currentUser = localStorage.getItem("currentUser");
   const navigate = useNavigate();
   const location = useLocation();
   const query = new URLSearchParams(location.search);
-  const initialPage = parseInt(query.get("page") || "1", 10);
+  const initialPage = Number(query.get("page")) || 1;
   const [currentPage, setCurrentPage] = useState(initialPage);
   const rowsPerPage = 5;
+  const totalPages = Math.ceil(totalCount / rowsPerPage);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -34,8 +32,6 @@ const UsersPage = () => {
     navigate(`/user/${userId}`);
   };
 
-  const totalPages = Math.ceil(10 / rowsPerPage);
-
   useEffect(() => {
     axios
       .get(
@@ -43,11 +39,15 @@ const UsersPage = () => {
           rowsPerPage * (currentPage - 1)
         }&_limit=${rowsPerPage * currentPage}`
       )
-      .then((res) => setData(res.data))
+      .then((res) => {
+        setData(res.data);
+        const dataCount = res.headers["x-total-count"];
+        setTotalCount(dataCount);
+      })
       .catch((err) => console.error(err));
     if (currentUser) {
-      const parsedUser: Username = JSON.parse(currentUser);
-      setUsername(parsedUser.username);
+      const parsedUser = JSON.parse(currentUser);
+      setUsername(parsedUser);
     } else {
       navigate("/login");
     }
@@ -57,18 +57,20 @@ const UsersPage = () => {
     <div className="userBackground UserBackgroundImg">
       <div className="user-postTopBar">
         <div className="username">
-          <h3 className="fw-bold">Welcome {username} for the Users Section</h3>
+          <h3 className="header-heading">
+            Welcome {username} for the Users Section
+          </h3>
         </div>
         <button
           type="button"
-          className="btn btn-primary"
+          className="pageButton"
           onClick={() => navigate("/")}
         >
           Back
         </button>
       </div>
-      <div className="background_table mt-3 d-flex flex-column justify-content-center align-items-center">
-        <h3 className="text-center text-white">Users</h3>
+      <div className="background_table">
+        <h3 className="tableHeading">Users</h3>
         <table className="content_table">
           <thead>
             <tr>

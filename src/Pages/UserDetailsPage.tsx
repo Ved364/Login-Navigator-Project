@@ -2,10 +2,6 @@ import axios from "axios";
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-type Username = {
-  username: string;
-};
-
 type Address = {
   street: string;
   suite: string;
@@ -47,8 +43,8 @@ const UserDetailsPage = () => {
     }
 
     return (
-      <div className="background_table mt-3 d-flex flex-column justify-content-center align-items-center">
-        <h3 className="text-center text-white">User Id: {user.id}</h3>
+      <div className="background_table">
+        <h3 className="tableHeading">User Id: {user.id}</h3>
         <table className="content_table">
           <tbody>
             <tr>
@@ -110,8 +106,8 @@ const UserDetailsPage = () => {
 
   useEffect(() => {
     if (currentUser) {
-      const parsedUser: Username = JSON.parse(currentUser);
-      setUsername(parsedUser.username);
+      const parsedUser = JSON.parse(currentUser);
+      setUsername(parsedUser);
     } else {
       navigate("/login");
     }
@@ -124,11 +120,7 @@ const UserDetailsPage = () => {
           <div className="username">
             <h3>{username}</h3>
           </div>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={handleUserpage}
-          >
+          <button type="button" className="pageButton" onClick={handleUserpage}>
             Back
           </button>
         </div>

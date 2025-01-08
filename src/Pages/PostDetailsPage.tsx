@@ -2,10 +2,6 @@ import axios from "axios";
 import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-type User = {
-  username: string;
-};
-
 type PostDetails = {
   userId: number;
   id: number;
@@ -69,8 +65,8 @@ const PostDetailsPage = () => {
 
   useEffect(() => {
     if (currentUser) {
-      const parsedUser: User = JSON.parse(currentUser);
-      setUsername(parsedUser.username);
+      const parsedUser = JSON.parse(currentUser);
+      setUsername(parsedUser);
     } else {
       navigate("/login");
     }
@@ -83,11 +79,7 @@ const PostDetailsPage = () => {
           <div className="username">
             <h3>{username}</h3>
           </div>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={handleUserpage}
-          >
+          <button type="button" className="pageButton" onClick={handleUserpage}>
             Back
           </button>
         </div>
