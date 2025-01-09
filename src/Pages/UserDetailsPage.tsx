@@ -71,7 +71,8 @@ const UserDetailsPage = () => {
             <UserContent user={user} />
           </div>
         )}
-        {!loading && !user ? <div>User not found</div> : <div>Loading...</div>}
+        {loading && <div>Loading...</div>}
+        {!loading && !user && <div>Page not found</div>}
       </div>
     </>
   );

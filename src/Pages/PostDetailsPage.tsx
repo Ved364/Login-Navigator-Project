@@ -58,7 +58,8 @@ const PostDetailsPage = () => {
           <PostContent post={post} />
         </div>
       )}
-      {!loading && !post ? <div>Page not found</div> : <div>Loading...</div>}
+      {loading && <div>Loading...</div>}
+      {!loading && !post && <div>Page not found</div>}
     </>
   );
 };
