@@ -6,7 +6,7 @@ type UserPostLinks = {
 };
 
 const HomePage = () => {
-  const currentUser = localStorage.getItem("currentUser");
+  const currentUser = localStorage.getItem("email");
   const userPostButton: UserPostLinks[] = [
     { name: "Users", navLink: "/users" },
     { name: "Posts", navLink: "/posts" },

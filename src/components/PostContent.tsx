@@ -1,19 +1,10 @@
 import { PostDetails } from "../Pages/PostDetailsPage";
 
 type Props = {
-  loading: boolean;
-  post: PostDetails | null;
+  post: PostDetails;
 };
 
-const PostContent = ({ loading, post }: Props) => {
-  if (loading) {
-    return <div>Loading.....</div>;
-  }
-
-  if (!post) {
-    return <div>Post not found</div>;
-  }
-
+const PostContent = ({ post }: Props) => {
   return (
     <div className="postDetailsCard">
       <div className="postDetailsSmallCard m-4">

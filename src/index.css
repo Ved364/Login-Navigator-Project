@@ -361,3 +361,8 @@
     color: red;
     margin-left: 20px;
 }
+
+.tableLoading {
+    color: white;
+    text-align: center;
+}

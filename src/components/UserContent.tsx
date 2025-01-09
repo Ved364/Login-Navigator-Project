@@ -1,19 +1,10 @@
 import { UserDetails } from "../Pages/UserDetailsPage";
 
 type Props = {
-  loading: boolean;
-  user: UserDetails | null;
+  user: UserDetails;
 };
 
-const UserContent = ({ loading, user }: Props) => {
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!user) {
-    return <div>User not found</div>;
-  }
-
+const UserContent = ({ user }: Props) => {
   return (
     <div className="background_table">
       <h3 className="tableHeading">User Id: {user.id}</h3>

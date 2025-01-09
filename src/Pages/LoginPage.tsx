@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 type FormEvent = React.FormEvent<HTMLFormElement>;
 
 const LoginPage = () => {
-  const localEmail = localStorage.getItem("Email");
-  const localPassword = localStorage.getItem("Password");
+  const localEmail = localStorage.getItem("email");
+  const localPassword = localStorage.getItem("password");
   const [error, setError] = useState<boolean>(false);
   const navigate = useNavigate();
 
